@@ -1,8 +1,10 @@
 # Solar System
 
+![ss](/docs/img/solar_system.gif)
+
 A Three.js project showcasing an interactive solar system visualization built with [Three.js](https://threejs.org/)
 
-![ss](/docs/img/ss_1.png)
+![ss](/docs/img/ss_2.png)
 
 ## Overview
 
@@ -36,8 +38,3 @@ src/
 └── assets/
     └── textures/     # Texture files
 ```
-
-## Credits
-
-- Course: [Zero to Mastery - Three.js Crash Course](https://www.youtube.com/watch?v=KM64t3pA4fs)
-- Instructor: Jesse Zhou
