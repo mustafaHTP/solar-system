@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { buildCamera } from "./lib/camera";
 import { Planet } from "./lib/planet";
 import { planetDataArray } from "./data/planet-data";
+import { GLOBAL_SPEED_SCALE } from "./lib/config";
 
 // construct planets
 const planets: Planet[] = planetDataArray.map((pd) => {
@@ -60,27 +61,31 @@ function update() {
 
   planets.forEach((p) => {
     // rotate around orbit
-    const sinTheta = Math.sin(elapsedTime * p.orbitSpeed);
-    const cosTheta = Math.cos(elapsedTime * p.orbitSpeed);
+    const sinTheta = Math.sin(elapsedTime * p.orbitSpeed * GLOBAL_SPEED_SCALE);
+    const cosTheta = Math.cos(elapsedTime * p.orbitSpeed * GLOBAL_SPEED_SCALE);
     const x = p.orbitRadius * cosTheta;
     const y = p.orbitRadius * sinTheta;
     p.mesh.position.set(x, 0, y);
     //self rotation
     const rotationSpeedAsEulerAngle =
-      THREE.MathUtils.DEG2RAD * p.selfRotationSpeed;
+      THREE.MathUtils.DEG2RAD * p.selfRotationSpeed * GLOBAL_SPEED_SCALE;
     const yaw = rotationSpeedAsEulerAngle * timeDelta;
     p.mesh.rotateY(yaw);
 
     // apply same processes to moons if any
     p.moons.forEach((m) => {
-      const sinTheta = Math.sin(elapsedTime * m.orbitSpeed);
-      const cosTheta = Math.cos(elapsedTime * m.orbitSpeed);
+      const sinTheta = Math.sin(
+        elapsedTime * m.orbitSpeed * GLOBAL_SPEED_SCALE,
+      );
+      const cosTheta = Math.cos(
+        elapsedTime * m.orbitSpeed * GLOBAL_SPEED_SCALE,
+      );
       const x = m.orbitRadius * cosTheta;
       const y = m.orbitRadius * sinTheta;
       m.mesh.position.set(x, 0, y);
       //self rotation
       const rotationSpeedAsEulerAngle =
-        THREE.MathUtils.DEG2RAD * m.selfRotationSpeed;
+        THREE.MathUtils.DEG2RAD * m.selfRotationSpeed * GLOBAL_SPEED_SCALE;
       const yaw = rotationSpeedAsEulerAngle * timeDelta;
       m.mesh.rotateY(yaw);
     });
