@@ -100,6 +100,18 @@ const planets: Planet[] = planetDataArray.map((pd) => {
 
 // Init scene
 const scene = new THREE.Scene();
+const loader = new THREE.CubeTextureLoader().setPath(
+  "src/assets/textures/cubeMap/",
+);
+const cubeTexture = await loader.loadAsync([
+  "px.png",
+  "nx.png",
+  "py.png",
+  "ny.png",
+  "pz.png",
+  "nz.png",
+]);
+scene.background = cubeTexture;
 // Init camera
 const camera = buildCamera();
 
@@ -111,11 +123,11 @@ planets.forEach((p) => {
 camera.position.z = 10;
 // Add elements to scene
 const axesHelper = new THREE.AxesHelper(100);
-const ambientLight = new THREE.AmbientLight(0xffffff, 5);
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambientLight);
 
-// const pointLight = new THREE.PointLight(0xffffff, 1000);
-// scene.add(pointLight);
+const pointLight = new THREE.PointLight(0xffffff, 1000);
+scene.add(pointLight);
 planets.forEach((p) => {
   scene.add(p.mesh);
 });
