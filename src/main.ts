@@ -24,9 +24,7 @@ let globalSpeedScale = GLOBAL_SPEED;
 // Init scene
 const scene = new THREE.Scene();
 // Set skybox
-const loader = new THREE.CubeTextureLoader().setPath(
-  "src/assets/textures/cubeMap/",
-);
+const loader = new THREE.CubeTextureLoader().setPath("textures/cubeMap/");
 const cubeTexture = await loader.loadAsync([
   "px.png",
   "nx.png",

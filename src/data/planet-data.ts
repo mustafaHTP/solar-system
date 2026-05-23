@@ -9,7 +9,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 0,
     orbitSpeed: 0,
     selfRotationSpeed: 5,
-    texturePath: "src/assets/textures/2k_sun.jpg",
+    texturePath: "textures/2k_sun.jpg",
     moons: [],
   },
   {
@@ -19,7 +19,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 10 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 4.15,
     selfRotationSpeed: 10,
-    texturePath: "src/assets/textures/2k_mercury.jpg",
+    texturePath: "textures/2k_mercury.jpg",
     moons: [],
   },
   {
@@ -29,7 +29,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 15 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 1.62,
     selfRotationSpeed: 7,
-    texturePath: "src/assets/textures/2k_venus.jpg",
+    texturePath: "textures/2k_venus.jpg",
     moons: [],
   },
   {
@@ -39,7 +39,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 20 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 1,
     selfRotationSpeed: 15,
-    texturePath: "src/assets/textures/2k_earth.jpg",
+    texturePath: "textures/2k_earth.jpg",
     moons: [
       {
         name: "moon",
@@ -48,7 +48,7 @@ export const planetDataArray: PlanetData[] = [
         orbitRadius: 2 * GLOBAL_SIZE_SCALE,
         orbitSpeed: 5,
         selfRotationSpeed: 10,
-        texturePath: "src/assets/textures/2k_moon.jpg",
+        texturePath: "textures/2k_moon.jpg",
         moons: [],
       },
     ],
@@ -60,7 +60,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 25 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.53,
     selfRotationSpeed: 12,
-    texturePath: "src/assets/textures/2k_mars.jpg",
+    texturePath: "textures/2k_mars.jpg",
     moons: [],
   },
   {
@@ -70,7 +70,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 35 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.084,
     selfRotationSpeed: 45,
-    texturePath: "src/assets/textures/2k_jupiter.jpg",
+    texturePath: "textures/2k_jupiter.jpg",
     moons: [],
   },
   {
@@ -80,7 +80,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 45 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.034,
     selfRotationSpeed: 38,
-    texturePath: "src/assets/textures/2k_saturn.jpg",
+    texturePath: "textures/2k_saturn.jpg",
     moons: [],
   },
   {
@@ -90,7 +90,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 55 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.0119,
     selfRotationSpeed: 30,
-    texturePath: "src/assets/textures/2k_uranus.jpg",
+    texturePath: "textures/2k_uranus.jpg",
     moons: [],
   },
   {
@@ -100,7 +100,7 @@ export const planetDataArray: PlanetData[] = [
     orbitRadius: 65 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.006,
     selfRotationSpeed: 33,
-    texturePath: "src/assets/textures/2k_neptune.jpg",
+    texturePath: "textures/2k_neptune.jpg",
     moons: [],
   },
 ];
