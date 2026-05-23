@@ -36,10 +36,19 @@ const venusTexture = await textureLoader.loadAsync(
 );
 venusTexture.colorSpace = THREE.SRGBColorSpace;
 
+const jupiterTexture = moonTexture;
+const saturnTexture = moonTexture;
+const uranusTexture = moonTexture;
+const neptuneTexture = moonTexture;
+
+const globalSizeScale = 10;
+const globalOrbitScale = 10;
+const globalSpeedScale = 0.3;
+
 const planetDataArray: PlanetData[] = [
   {
     name: "sun",
-    scale: 5,
+    scale: 15 * globalSizeScale,
     orbitRadius: 0,
     orbitSpeed: 0,
     selfRotationSpeed: 5,
@@ -47,48 +56,85 @@ const planetDataArray: PlanetData[] = [
     moons: [],
   },
   {
-    name: "earth",
-    scale: 1,
-    orbitRadius: 20,
-    orbitSpeed: 0.5,
-    selfRotationSpeed: 100,
-    texture: earthTexture,
-    moons: [],
-  },
-  {
     name: "mercury",
-    scale: 0.5,
-    orbitRadius: 10,
-    orbitSpeed: 0.4,
-    selfRotationSpeed: 0.01,
+    scale: 0.07 * globalSizeScale,
+    orbitRadius: 10 * globalOrbitScale,
+    orbitSpeed: 4.15 * globalSpeedScale,
+    selfRotationSpeed: 10 * globalSpeedScale,
     texture: mercuryTexture,
     moons: [],
   },
   {
     name: "venus",
-    scale: 0.8,
-    orbitRadius: 15,
-    orbitSpeed: 0.8,
-    selfRotationSpeed: 0.007,
+    scale: 0.17 * globalSizeScale,
+    orbitRadius: 15 * globalOrbitScale,
+    orbitSpeed: 1.62 * globalSpeedScale,
+    selfRotationSpeed: 7 * globalSpeedScale,
     texture: venusTexture,
     moons: [],
   },
   {
+    name: "earth",
+    scale: 0.14 * globalSizeScale,
+    orbitRadius: 20 * globalOrbitScale,
+    orbitSpeed: 1 * globalSpeedScale,
+    selfRotationSpeed: 15 * globalSpeedScale,
+    texture: earthTexture,
+    moons: [
+      {
+        name: "moon",
+        scale: 0.05 * globalSizeScale,
+        orbitRadius: 2 * globalOrbitScale,
+        orbitSpeed: 5 * globalSpeedScale,
+        selfRotationSpeed: 10 * globalSpeedScale,
+        texture: moonTexture,
+        moons: [],
+      },
+    ],
+  },
+  {
     name: "mars",
-    scale: 0.7,
-    orbitRadius: 25,
-    orbitSpeed: 0.3,
-    selfRotationSpeed: 0.003,
+    scale: 0.1 * globalSizeScale,
+    orbitRadius: 25 * globalOrbitScale,
+    orbitSpeed: 0.53 * globalSpeedScale,
+    selfRotationSpeed: 12 * globalSpeedScale,
     texture: marsTexture,
     moons: [],
   },
   {
-    name: "moon",
-    scale: 0.5,
-    orbitRadius: 15,
-    orbitSpeed: 0.5,
-    selfRotationSpeed: 10,
-    texture: moonTexture,
+    name: "jupiter",
+    scale: 2.05 * globalSizeScale,
+    orbitRadius: 35 * globalOrbitScale,
+    orbitSpeed: 0.084 * globalSpeedScale,
+    selfRotationSpeed: 45 * globalSpeedScale,
+    texture: jupiterTexture,
+    moons: [],
+  },
+  {
+    name: "saturn",
+    scale: 1.73 * globalSizeScale,
+    orbitRadius: 45 * globalOrbitScale,
+    orbitSpeed: 0.034 * globalSpeedScale,
+    selfRotationSpeed: 38 * globalSpeedScale,
+    texture: saturnTexture,
+    moons: [],
+  },
+  {
+    name: "uranus",
+    scale: 0.74 * globalSizeScale,
+    orbitRadius: 55 * globalOrbitScale,
+    orbitSpeed: 0.0119 * globalSpeedScale,
+    selfRotationSpeed: 30 * globalSpeedScale,
+    texture: uranusTexture,
+    moons: [],
+  },
+  {
+    name: "neptune",
+    scale: 0.71 * globalSizeScale,
+    orbitRadius: 65 * globalOrbitScale,
+    orbitSpeed: 0.006 * globalSpeedScale,
+    selfRotationSpeed: 33 * globalSpeedScale,
+    texture: neptuneTexture,
     moons: [],
   },
 ];
@@ -120,10 +166,9 @@ planets.forEach((p) => {
   p.mesh.position.x = p.orbitRadius;
 });
 
-camera.position.z = 10;
+camera.position.set(0, 80, 260);
 // Add elements to scene
-const axesHelper = new THREE.AxesHelper(100);
-const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 3);
 scene.add(ambientLight);
 
 const pointLight = new THREE.PointLight(0xffffff, 1000);
@@ -131,7 +176,6 @@ scene.add(pointLight);
 planets.forEach((p) => {
   scene.add(p.mesh);
 });
-scene.add(axesHelper);
 
 // Init renderer
 const renderer = new THREE.WebGLRenderer();
