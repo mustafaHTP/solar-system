@@ -6,7 +6,7 @@ export interface PlanetData {
   orbitRadius: number;
   orbitSpeed: number;
   selfRotationSpeed: number;
-  texture: THREE.Texture;
+  texturePath: string;
   moons: PlanetData[];
 }
 
@@ -19,8 +19,12 @@ export class Planet {
   public readonly moons: Planet[];
 
   constructor(planetData: PlanetData) {
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load(planetData.texturePath);
+    texture.colorSpace = THREE.SRGBColorSpace;
+
     const planetMaterial = new THREE.MeshStandardMaterial({
-      map: planetData.texture,
+      map: texture,
     });
     const planetGeometry = new THREE.SphereGeometry(1);
     this.mesh = new THREE.Mesh(planetGeometry, planetMaterial);
