@@ -5,11 +5,6 @@ import { Planet } from "./lib/planet";
 import { planetDataArray } from "./data/planet-data";
 import { GLOBAL_SPEED_SCALE } from "./lib/config";
 
-// construct planets
-const planets: Planet[] = planetDataArray.map((pd) => {
-  return new Planet(pd);
-});
-
 // Init scene
 const scene = new THREE.Scene();
 const loader = new THREE.CubeTextureLoader().setPath(
@@ -24,21 +19,27 @@ const cubeTexture = await loader.loadAsync([
   "nz.png",
 ]);
 scene.background = cubeTexture;
+
 // Init camera
 const camera = buildCamera();
+camera.position.set(0, 80, 260);
 
+// Init planets
+const planets: Planet[] = planetDataArray.map((pd) => {
+  return new Planet(pd);
+});
 // put planets in their orbit position
 planets.forEach((p) => {
   p.mesh.position.x = p.orbitRadius;
 });
 
-camera.position.set(0, 80, 260);
-// Add elements to scene
+// Init lights
 const ambientLight = new THREE.AmbientLight(0xffffff, 3);
-scene.add(ambientLight);
-
 const pointLight = new THREE.PointLight(0xffffff, 1000);
+
+// Add elements to scene
 scene.add(pointLight);
+scene.add(ambientLight);
 planets.forEach((p) => {
   scene.add(p.mesh);
 });
@@ -47,8 +48,10 @@ planets.forEach((p) => {
 const renderer = new THREE.WebGLRenderer();
 document.body.appendChild(renderer.domElement);
 renderer.setSize(window.innerWidth, window.innerHeight);
+
 // Init controls
 const controls = new OrbitControls(camera, renderer.domElement);
+
 // Init timer
 const timer = new THREE.Timer();
 
@@ -74,6 +77,7 @@ function update() {
 
     // apply same processes to moons if any
     p.moons.forEach((m) => {
+      //rotate around orbit
       const sinTheta = Math.sin(
         elapsedTime * m.orbitSpeed * GLOBAL_SPEED_SCALE,
       );
