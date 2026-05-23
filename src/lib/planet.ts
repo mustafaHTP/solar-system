@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { planetDataArray } from "../data/planet-data";
 
 export interface PlanetData {
   name: string;
@@ -42,4 +43,12 @@ export class Planet {
       this.mesh.add(m.mesh);
     });
   }
+}
+
+export function buildPlanets() {
+  const planets = planetDataArray.map((pd) => {
+    return new Planet(pd);
+  });
+
+  return planets;
 }
