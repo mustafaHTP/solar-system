@@ -2,7 +2,20 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { buildCamera } from "./lib/camera";
 import { buildPlanets, Planet } from "./lib/planet";
-import { GLOBAL_MAX_SPEED, GLOBAL_MIN_SPEED, GLOBAL_SPEED } from "./lib/config";
+import {
+  AMBIENT_LIGHT_INTENSITY,
+  GLOBAL_MAX_SPEED,
+  GLOBAL_MIN_SPEED,
+  GLOBAL_SPEED,
+  MAX_AMBIENT_LIGHT_INTENSITY,
+  MAX_SUN_LIGHT_DISTANCE,
+  MAX_SUN_LIGHT_INTENSITY,
+  MIN_AMBIENT_LIGHT_INTENSITY,
+  MIN_SUN_LIGHT_DISTANCE,
+  MIN_SUN_LIGHT_INTENSITY,
+  SUN_LIGHT_DISTANCE,
+  SUN_LIGHT_INTENSITY,
+} from "./lib/config";
 import { Pane } from "tweakpane";
 
 // Init general params
@@ -37,11 +50,15 @@ planets.forEach((p) => {
 });
 
 // Init lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 2);
-const pointLight = new THREE.PointLight(0xffffff, 1000);
+const ambientLight = new THREE.AmbientLight(0xffffff, AMBIENT_LIGHT_INTENSITY);
+const sunLight = new THREE.PointLight(
+  0xffffff,
+  SUN_LIGHT_INTENSITY,
+  SUN_LIGHT_DISTANCE,
+);
 
 // Add elements to scene
-scene.add(pointLight);
+scene.add(sunLight);
 scene.add(ambientLight);
 planets.forEach((p) => {
   scene.add(p.mesh);
@@ -56,24 +73,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 // Init pane (UI)
-const pane = new Pane();
-const folder = pane.addFolder({
-  title: "Settings",
-  expanded: true,
-});
-
-const speedBinding = folder.addBinding(
-  {
-    Speed: globalSpeedScale,
-  },
-  "Speed",
-  { min: GLOBAL_MIN_SPEED, max: GLOBAL_MAX_SPEED, step: 0.1 },
-);
-
-speedBinding.on("change", (ev) => {
-  console.log(ev.value);
-  globalSpeedScale = ev.value;
-});
+buildUI();
 
 // Init timer
 const timer = new THREE.Timer();
@@ -125,3 +125,66 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
+
+function buildUI() {
+  const pane = new Pane();
+  const paneParams = {
+    Speed: globalSpeedScale,
+    SunLightIntensity: SUN_LIGHT_INTENSITY,
+    SunLightDistance: SUN_LIGHT_DISTANCE,
+    AmbientLightIntensity: AMBIENT_LIGHT_INTENSITY,
+  };
+  const folder = pane.addFolder({
+    title: "Settings",
+    expanded: true,
+  });
+
+  const speedBinding = folder.addBinding(paneParams, "Speed", {
+    min: GLOBAL_MIN_SPEED,
+    max: GLOBAL_MAX_SPEED,
+    step: 0.1,
+  });
+  speedBinding.on("change", (ev) => {
+    console.log(ev.value);
+    globalSpeedScale = ev.value;
+  });
+
+  const ambientLightIntensityBinding = folder.addBinding(
+    paneParams,
+    "AmbientLightIntensity",
+    {
+      min: MIN_AMBIENT_LIGHT_INTENSITY,
+      max: MAX_AMBIENT_LIGHT_INTENSITY,
+      step: 0.1,
+    },
+  );
+  ambientLightIntensityBinding.on("change", (evt) => {
+    ambientLight.intensity = evt.value;
+  });
+
+  const sunLightIntensityBinding = folder.addBinding(
+    paneParams,
+    "SunLightIntensity",
+    {
+      min: MIN_SUN_LIGHT_INTENSITY,
+      max: MAX_SUN_LIGHT_INTENSITY,
+      step: 1000,
+    },
+  );
+  sunLightIntensityBinding.on("change", (evt) => {
+    sunLight.intensity = evt.value;
+  });
+
+  const sunLightDistanceBinding = folder.addBinding(
+    paneParams,
+    "SunLightDistance",
+    {
+      min: MIN_SUN_LIGHT_DISTANCE,
+      max: MAX_SUN_LIGHT_DISTANCE,
+      step: 100,
+    },
+  );
+  sunLightDistanceBinding.on("change", (evt) => {
+    sunLight.distance = evt.value;
+  });
+}

@@ -3,6 +3,9 @@ import { planetDataArray } from "../data/planet-data";
 
 export interface PlanetData {
   name: string;
+  // Sun is exceptional planet, since it emits lights and it must be visible, MeshBasicMaterial is applied
+  // ? If MeshStandardMaterial is used, since point light inside is sun, sun planet is not visible
+  isSun: boolean;
   scale: number;
   orbitRadius: number;
   orbitSpeed: number;
@@ -24,9 +27,16 @@ export class Planet {
     const texture = textureLoader.load(planetData.texturePath);
     texture.colorSpace = THREE.SRGBColorSpace;
 
-    const planetMaterial = new THREE.MeshStandardMaterial({
-      map: texture,
-    });
+    let planetMaterial;
+    if (planetData.isSun) {
+      planetMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+      });
+    } else {
+      planetMaterial = new THREE.MeshStandardMaterial({
+        map: texture,
+      });
+    }
     const planetGeometry = new THREE.SphereGeometry(1);
     this.mesh = new THREE.Mesh(planetGeometry, planetMaterial);
     this.mesh.scale.setScalar(planetData.scale);

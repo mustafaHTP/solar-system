@@ -4,6 +4,7 @@ import type { PlanetData } from "../lib/planet";
 export const planetDataArray: PlanetData[] = [
   {
     name: "sun",
+    isSun: true,
     scale: 15 * GLOBAL_SIZE_SCALE,
     orbitRadius: 0,
     orbitSpeed: 0,
@@ -13,6 +14,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "mercury",
+    isSun: false,
     scale: 0.07 * GLOBAL_SIZE_SCALE,
     orbitRadius: 10 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 4.15,
@@ -22,6 +24,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "venus",
+    isSun: false,
     scale: 0.17 * GLOBAL_SIZE_SCALE,
     orbitRadius: 15 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 1.62,
@@ -31,6 +34,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "earth",
+    isSun: false,
     scale: 0.14 * GLOBAL_SIZE_SCALE,
     orbitRadius: 20 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 1,
@@ -39,6 +43,7 @@ export const planetDataArray: PlanetData[] = [
     moons: [
       {
         name: "moon",
+        isSun: false,
         scale: 0.05 * GLOBAL_SIZE_SCALE,
         orbitRadius: 2 * GLOBAL_SIZE_SCALE,
         orbitSpeed: 5,
@@ -50,6 +55,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "mars",
+    isSun: false,
     scale: 0.1 * GLOBAL_SIZE_SCALE,
     orbitRadius: 25 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.53,
@@ -59,6 +65,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "jupiter",
+    isSun: false,
     scale: 2.05 * GLOBAL_SIZE_SCALE,
     orbitRadius: 35 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.084,
@@ -68,6 +75,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "saturn",
+    isSun: false,
     scale: 1.73 * GLOBAL_SIZE_SCALE,
     orbitRadius: 45 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.034,
@@ -77,6 +85,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "uranus",
+    isSun: false,
     scale: 0.74 * GLOBAL_SIZE_SCALE,
     orbitRadius: 55 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.0119,
@@ -86,6 +95,7 @@ export const planetDataArray: PlanetData[] = [
   },
   {
     name: "neptune",
+    isSun: false,
     scale: 0.71 * GLOBAL_SIZE_SCALE,
     orbitRadius: 65 * GLOBAL_SIZE_SCALE,
     orbitSpeed: 0.006,
